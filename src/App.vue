@@ -1,13 +1,12 @@
 <template>
   <v-app>
     <v-app-bar
-      dense
+      app
       flat
     >
       <v-toolbar-title class="text-uppercase font-weight-medium">
         Playground
       </v-toolbar-title>
-      <v-spacer />
     </v-app-bar>
     <v-content>
       <router-view />
@@ -18,17 +17,5 @@
 <script>
 export default {
   name: 'App',
-
-  components: {
-  },
-
-  data() {
-    return {
-
-    };
-  },
-  created() {
-    console.log(this);
-  },
 };
 </script>

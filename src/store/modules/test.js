@@ -1,17 +1,13 @@
 export default {
-  state: () => ({
-
-  }),
+  state: {
+  },
 
   mutations: {
-
   },
 
   actions: {
-
   },
 
   getters: {
-
   },
 };
