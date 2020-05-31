@@ -25,28 +25,10 @@
         dense
       >
         <template v-for="(message, i) in messages">
-          <v-subheader
-            v-if="message.header"
+          <message
             :key="i"
-            v-text="message.text"
+            :item="message"
           />
-
-          <v-list-item
-            v-else
-            :key="i"
-          >
-            <v-list-item-content>
-              <v-list-item-title>
-                {{ message.userName }} {{ time(message.ts) }}
-              </v-list-item-title>
-              <v-list-item-title>
-                <p style="white-space: normal; margin: 0px">
-                  {{ message.text }}
-                </p>
-              </v-list-item-title>
-              <v-divider />
-            </v-list-item-content>
-          </v-list-item>
         </template>
       </v-list>
     </v-card-text>
@@ -65,12 +47,15 @@
 </template>
 <script>
 import io from 'socket.io-client';
-import moment from 'moment';
+import Message from '@/components/Message';
 
 let socket = null;
 
 export default {
   name: 'ChatRoom',
+  components: {
+    Message,
+  },
   props: {
     roomName: { type: String, required: true },
     userName: { type: String, required: true },
@@ -90,7 +75,8 @@ export default {
       socket.emit('join', { roomName, userName });
 
       socket.on('message', (payload) => {
-        this.messages.push(payload);
+        // eslint-disable-next-line no-param-reassign
+        this.messages.push({ me: payload.userName === this.userName, ...payload });
 
         if (this.bottom) {
           this.$nextTick(() => {
@@ -103,12 +89,10 @@ export default {
   destroyed() {
     if (socket) {
       socket.close();
+      socket = null;
     }
   },
   methods: {
-    time(ts) {
-      return moment(ts).format('LT');
-    },
     sendMessage() {
       if (this.text.length > 0) {
         const payload = {
