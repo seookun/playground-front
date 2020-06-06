@@ -47,7 +47,7 @@
 </template>
 <script>
 import io from 'socket.io-client';
-import Message from '@/components/Message';
+import Message from '@/components/Message.vue';
 
 let socket = null;
 

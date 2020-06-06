@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-import ChatFrame from '@/views/ChatFrame';
-import ChatLobby from '@/views/ChatLobby';
-import ChatRoom from '@/views/ChatRoom';
+import ChatFrame from '@/views/ChatFrame.vue';
+import ChatLobby from '@/views/ChatLobby.vue';
+import ChatRoom from '@/views/ChatRoom.vue';
 
 Vue.use(VueRouter);
 
