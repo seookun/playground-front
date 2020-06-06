@@ -2,7 +2,7 @@
   <v-card
     outlined
     class="mx-auto"
-    width="1000"
+    width="700"
   >
     <V-card-title>
       {{ roomName }}
@@ -27,6 +27,7 @@
         <template v-for="(message, i) in messages">
           <message
             :key="i"
+            class="mb-2"
             :item="message"
           />
         </template>
@@ -80,7 +81,7 @@ export default {
 
         if (this.bottom) {
           this.$nextTick(() => {
-            this.$refs['chat-body'].scrollTop = 9999;
+            this.$refs['chat-body'].scrollTop = this.$refs['chat-body'].scrollHeight;
           });
         }
       });
@@ -105,6 +106,16 @@ export default {
         this.text = '';
         this.bottom = true;
 
+        socket.emit('message', payload);
+        socket.emit('message', payload);
+        socket.emit('message', payload);
+        socket.emit('message', payload);
+        socket.emit('message', payload);
+        socket.emit('message', payload);
+        socket.emit('message', payload);
+        socket.emit('message', payload);
+        socket.emit('message', payload);
+        socket.emit('message', payload);
         socket.emit('message', payload);
       }
     },

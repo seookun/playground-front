@@ -1,6 +1,7 @@
 <template>
   <v-subheader
     v-if="item.header"
+    style="font-size: 1.0em;"
     v-text="item.text"
   />
   <v-list-item
@@ -18,8 +19,6 @@
         >
           {{ item.text }}
         </p>
-      </v-list-item-title>
-      <v-list-item-title>
         <span style="font-size: 0.7em">
           {{ time(item.ts) }}
         </span>
@@ -29,7 +28,7 @@
   <v-list-item
     v-else
     class="px-2 py-0"
-    style="float: left; clear: both; max-width: 70%;"
+    style="float: left; clear: both; max-width: 60%;"
   >
     <v-list-item-content
       class="mb-2 pa-0"
@@ -46,12 +45,7 @@
         >
           {{ item.text }}
         </p>
-      </v-list-item-title>
-      <v-list-item-title
-        class="d-flex"
-      >
-        <v-spacer />
-        <span style="font-size: 0.7em">
+        <span style="font-size: 0.7em; float: right">
           {{ time(item.ts) }}
         </span>
       </v-list-item-title>
