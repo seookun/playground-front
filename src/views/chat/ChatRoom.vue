@@ -81,7 +81,8 @@ export default {
 
         if (this.bottom) {
           this.$nextTick(() => {
-            this.$refs['chat-body'].scrollTop = this.$refs['chat-body'].scrollHeight;
+            const chatBody = this.$refs['chat-body'];
+            chatBody.scrollTop = chatBody.scrollHeight;
           });
         }
       });
@@ -106,16 +107,6 @@ export default {
         this.text = '';
         this.bottom = true;
 
-        socket.emit('message', payload);
-        socket.emit('message', payload);
-        socket.emit('message', payload);
-        socket.emit('message', payload);
-        socket.emit('message', payload);
-        socket.emit('message', payload);
-        socket.emit('message', payload);
-        socket.emit('message', payload);
-        socket.emit('message', payload);
-        socket.emit('message', payload);
         socket.emit('message', payload);
       }
     },
