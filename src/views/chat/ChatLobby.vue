@@ -1,6 +1,7 @@
 <template>
   <v-form
     v-model="valid"
+    @submit="join"
   >
     <v-card
       outlined
@@ -26,9 +27,9 @@
         <v-spacer />
         <v-btn
           :disabled="!valid"
+          type="submit"
           outlined
           color="primary"
-          @click="join"
         >
           Join
         </v-btn>
