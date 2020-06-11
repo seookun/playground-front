@@ -1,8 +1,8 @@
 <template>
   <v-card
-    outlined
     class="mx-auto"
     width="700"
+    outlined
   >
     <V-card-title>
       {{ roomName }}

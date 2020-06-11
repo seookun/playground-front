@@ -50,7 +50,7 @@ export default {
   methods: {
     join() {
       const { roomName, userName } = this;
-      this.$router.push(`/chat/room/${roomName}/${userName}`);
+      this.$router.push(`/chat/${roomName}/${userName}`);
     },
   },
 };
