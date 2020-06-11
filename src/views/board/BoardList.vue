@@ -64,6 +64,7 @@
   </v-card>
 </template>
 <script>
+import axios from 'axios';
 import moment from 'moment';
 
 export default {
@@ -71,21 +72,14 @@ export default {
   data() {
     return {
       today: moment().endOf('day'),
-      boards: [
-        {
-          id: '1', title: '테스트a', author: '나나누', createTime: Date.now(),
-        },
-        {
-          id: '2', title: '테스트', author: '나나누', createTime: Date.now(),
-        },
-        {
-          id: '3', title: '테스트', author: '나나누', createTime: Date.now(),
-        },
-        {
-          id: '4', title: '테스트', author: '나나누', createTime: Date.now(),
-        },
-      ],
+      boards: [],
     };
+  },
+  async created() {
+    const res = await axios.get('http://localhost:3000/board');
+    if (res) {
+      this.boards = res.data;
+    }
   },
   methods: {
     time(ts) {

@@ -37,6 +37,7 @@ const routes = [
       {
         path: 'edit/:id',
         component: BoardEdit,
+        props: true,
       },
       {
         path: ':id',

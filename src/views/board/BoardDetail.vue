@@ -32,13 +32,17 @@
       >
         Edit
       </v-btn>
-      <v-btn outlined>
+      <v-btn
+        outlined
+        @click="onDelete()"
+      >
         Delete
       </v-btn>
     </v-card-actions>
   </v-card>
 </template>
 <script>
+import axios from 'axios';
 import moment from 'moment';
 
 export default {
@@ -49,17 +53,25 @@ export default {
   data() {
     return {
       today: moment().endOf('day'),
-      board: {
-        title: '테스트',
-        content: 'sdfdsf',
-        author: '메이비',
-        createTime: Date.now(),
-      },
+      board: {},
     };
+  },
+  async created() {
+    const res = await axios.get(`http://localhost:3000/board/${this.id}`);
+    if (res) {
+      const { title, content, createTime } = res.data;
+      this.board = { title, content, createTime };
+    }
   },
   methods: {
     time(ts) {
       return moment(ts).format('YYYY.MM.DD HH:mm');
+    },
+    async onDelete() {
+      const res = await axios.post(`http://localhost:3000/board/delete/${this.id}`);
+      if (res) {
+        this.$router.push('/board');
+      }
     },
   },
 };

@@ -6,6 +6,7 @@
   >
     <v-card-title>
       <v-text-field
+        v-model="board.title"
         outlined
         dense
         hide-details="auto"
@@ -16,6 +17,7 @@
       style="height: calc(100vh - 237px); overflow: auto;"
     >
       <v-textarea
+        v-model="board.content"
         outlined
         auto-grow
       />
@@ -26,20 +28,33 @@
       <v-btn
         outlined
         color="primary"
+        @click="onWrite"
       >
-        Save
+        Write
       </v-btn>
     </v-card-actions>
   </v-card>
 </template>
 <script>
+import axios from 'axios';
+
 export default {
   name: 'BoardCreate',
   data() {
     return {
+      board: {
+        title: '',
+        content: '',
+      },
     };
   },
   methods: {
+    async onWrite() {
+      const res = await axios.post('http://localhost:3000/board/create', this.board);
+      if (res) {
+        this.$router.push(`/board/${res.data.id}`);
+      }
+    },
   },
 };
 </script>

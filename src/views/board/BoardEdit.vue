@@ -6,6 +6,7 @@
   >
     <v-card-title>
       <v-text-field
+        v-model="board.title"
         outlined
         dense
         hide-details="auto"
@@ -16,6 +17,7 @@
       style="height: calc(100vh - 237px); overflow: auto;"
     >
       <v-textarea
+        v-model="board.content"
         outlined
         auto-grow
       />
@@ -26,6 +28,7 @@
       <v-btn
         outlined
         color="primary"
+        @click="onSave()"
       >
         Save
       </v-btn>
@@ -33,6 +36,8 @@
   </v-card>
 </template>
 <script>
+import axios from 'axios';
+
 export default {
   name: 'BoardEdit',
   props: {
@@ -40,9 +45,30 @@ export default {
   },
   data() {
     return {
+      board: {
+        title: '',
+        content: '',
+      },
     };
   },
+  async created() {
+    const res = await axios.get(`http://localhost:3000/board/${this.id}`);
+    if (res) {
+      const {
+        id, title, content, createTime,
+      } = res.data;
+      this.board = {
+        id, title, content, createTime,
+      };
+    }
+  },
   methods: {
+    async onSave() {
+      const res = await axios.post('http://localhost:3000/board/edit', this.board);
+      if (res) {
+        this.$router.push(`/board/${this.id}`);
+      }
+    },
   },
 };
 </script>
